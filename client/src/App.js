@@ -33,6 +33,14 @@ const App = () => {
                     <SignUp />
                  </Route>
 
+                 <Route path="/home" >
+                    <Redirect to="/" />
+                 </Route>
+
+                 <Route path="/" >
+                    404 PAGE
+                 </Route>
+
                 </Switch>
             </Router>
         
