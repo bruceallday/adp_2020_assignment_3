@@ -10,6 +10,8 @@ import {
 } from "react-router-dom"
 
 import Home from './components/home/home.component'
+import LogIn from './components/log-in/log-in.component'
+import SignUp from './components/sign-up/sign-up.component'
 
 const graphql = new GraphQL()
 
@@ -21,6 +23,14 @@ const App = () => {
 
                  <Route path="/" exact>
                     <Home />
+                 </Route>
+
+                 <Route path="/login" exact>
+                    <LogIn />
+                 </Route>
+
+                 <Route path="/signup" exact>
+                    <SignUp />
                  </Route>
 
                 </Switch>
