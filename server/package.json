@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "COOKIE_SECRET=bad_secret PGUSER=postgres PGDATABASE=aliens npx nodemon ./src/index.js",
+    "start": "COOKIE_SECRET=bad_secret PGUSER=postgres PGDATABASE=ASSIGNMENT_3_DB npx nodemon ./src/index.js",
     "start:production": "./src/index.js",
-    "db:migrate": "DATABASE_URL=postgres://postgres@localhost:5432/aliens node-pg-migrate",
-    "db:create": "npx createdbjs aliens",
-    "db:drop": "npx dropdbjs aliens || true",
+    "db:migrate": "DATABASE_URL=postgres://postgres@localhost:5432/ASSIGNMENT_3_DB node-pg-migrate",
+    "db:create": "npx createdbjs ASSIGNMENT_3_DB",
+    "db:drop": "npx dropdbjs ASSIGNMENT_3_DB || true",
     "db:reset": "yarn db:drop && yarn db:create && yarn db:migrate up"
   },
   "dependencies": {
