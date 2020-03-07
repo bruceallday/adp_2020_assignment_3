@@ -2,5 +2,26 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "COOKIE_SECRET=bad_secret PGUSER=postgres PGDATABASE=aliens npx nodemon ./src/index.js",
+    "start:production": "./src/index.js",
+    "db:migrate": "DATABASE_URL=postgres://postgres@localhost:5432/aliens node-pg-migrate",
+    "db:create": "npx createdbjs aliens",
+    "db:drop": "npx dropdbjs aliens || true",
+    "db:reset": "yarn db:drop && yarn db:create && yarn db:migrate up"
+  },
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0",
+    "bcrypt": "^4.0.0",
+    "connect-pg-simple": "^6.1.0",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "esm": "^3.2.25",
+    "node-pg-migrate": "^4.2.2",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "pgtools": "^0.3.0"
+  }
 }
