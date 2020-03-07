@@ -1,4 +1,7 @@
-/server/node_modules/
 /client/node_modules/
 /client/yarn.lock
+/client/.cache
+/client/dist
+
+/server/node_modules/
 /server/yarn.lock
