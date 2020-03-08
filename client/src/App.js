@@ -9,9 +9,10 @@ import {
     Link
 } from "react-router-dom"
 
-import Home from './components/home/home.component'
-import LogIn from './components/log-in/log-in.component'
-import SignUp from './components/sign-up/sign-up.component'
+import Home from './pages/home/home.component'
+import LogIn from './pages/log-in/log-in.component'
+import SignUp from './pages/sign-up/sign-up.component'
+import Header from './components/header/header.component'
 
 const graphql = new GraphQL()
 
