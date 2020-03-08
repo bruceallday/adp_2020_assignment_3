@@ -8,12 +8,12 @@ exports.up = pgm => {
         user_name: {type: 'text', notNull: true},
         user_email: {type: 'text', notNull: true},
         user_password: {type: 'text', notNull: true},
-        createdAt: {
+        created_at: {
             type: 'timestamp',
             notNull: true,
             default: pgm.func('current_timestamp'),
         },
-    }),
+    })
 
     pgm.createTable('user_posts', {
         id: 'id',
@@ -22,19 +22,14 @@ exports.up = pgm => {
         post_tags: {type: 'text', notNull: true},
         post_likes: {type: 'int', notNull: true},
         post_user_id: {type: 'int', notNull: true},
-        createdAt: {
+        created_at: {
             type: 'timestamp',
             notNull: true,
             default: pgm.func('current_timestamp'),
-        }
-    }),
+        },
+    })
+}
 
-
-
-};
-
-pgm.sql(`
-
-    `)
+pgm.sql(``)
 
 exports.down = pgm => {};
