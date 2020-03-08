@@ -7,6 +7,10 @@ const useStyles = makeStyles(({
     marginRight: 'auto',
   },
 
+  formField: {
+    margin: 10,
+  },
+
 }));
 
 export default useStyles;
