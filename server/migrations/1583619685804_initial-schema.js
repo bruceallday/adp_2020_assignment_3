@@ -20,13 +20,16 @@ exports.up = pgm => {
         post_title: {type: 'text', notNull: true},
         post_body: {type: 'text', notNull: true},
         post_tags: {type: 'text', notNull: true},
+        post_likes: {type: 'int', notNull: true},
         post_user_id: {type: 'int', notNull: true},
         createdAt: {
             type: 'timestamp',
             notNull: true,
             default: pgm.func('current_timestamp'),
         }
-    })
+    }),
+
+
 
 };
 
