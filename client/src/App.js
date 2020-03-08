@@ -16,35 +16,35 @@ import Header from './components/header/header.component'
 
 const graphql = new GraphQL()
 
+
 const App = () => {
-    return(
+    return (
         <GraphQLProvider graphql={graphql} >
-            <Router>
-                <Switch>
+                <Router>
+                    <Switch>
 
-                 <Route path="/" exact>
-                    <Home />
-                 </Route>
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
 
-                 <Route path="/login" exact>
-                    <LogIn />
-                 </Route>
+                        <Route path="/login" exact>
+                            <LogIn />
+                        </Route>
 
-                 <Route path="/signup" exact>
-                    <SignUp />
-                 </Route>
+                        <Route path="/signup" exact>
+                            <SignUp />
+                        </Route>
 
-                 <Route path="/home" >
-                    <Redirect to="/" />
-                 </Route>
+                        <Route path="/home" >
+                            <Redirect to="/" />
+                        </Route>
 
-                 <Route path="/" >
-                    404 PAGE
-                 </Route>
+                        <Route path="/" >
+                            404 PAGE
+                    </Route>
 
-                </Switch>
-            </Router>
-        
+                    </Switch>
+                </Router>        
         </GraphQLProvider>
     )
 }

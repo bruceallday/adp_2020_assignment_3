@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form'
 
 import Header from '../../components/header/header.component'
 
+import Paper from '@material-ui/core/Paper'
+
 import useStyles from './sign-up.styles'
 
 const SignUp = () => {
@@ -26,86 +28,90 @@ const SignUp = () => {
     return (
         <div >
             <Header />
-            <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
+            <div className={ classes.formContainer } >
+                <Paper elevation={ 3 } className={ classes.paper } >
+                    <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
 
-                <Typography className={classes.formField}>
-                    SIGN UP
-                </Typography>
+                        <Typography variant="h3" gutterBottom>
+                            Create account
+                        </Typography>
 
-                <TextField
-                    className={classes.formField}
-                    type="text"
-                    name="userName"
-                    label="User name"
-                    error={errors.userName != null}
-                    fullWidth
-                    inputRef={register({
-                        required: 'Required'
-                    })}
-                />
-                <Typography color="error">
-                    {errors.userName && errors.userName.message}
-                </Typography>
+                        <TextField
+                            className={classes.formField}
+                            type="text"
+                            name="userName"
+                            label="User name"
+                            error={errors.userName != null}
+                            fullWidth
+                            inputRef={register({
+                                required: 'Required'
+                            })}
+                        />
+                        <Typography color="error">
+                            {errors.userName && errors.userName.message}
+                        </Typography>
 
-                <TextField
-                    className={classes.formField}
-                    name="userEmail"
-                    label="Your email"
-                    type="email"
-                    error={errors.userEmail != null}
-                    fullWidth
-                    inputRef={register({
-                        required: 'Required'
-                    })}
-                />
-                <Typography color="error">
-                    {errors.userEmail && errors.userEmail.message}
-                </Typography>
-
-
-                <TextField
-                    className={classes.formField}
-                    name="userPassword"
-                    label="Password"
-                    type="password"
-                    error={errors.userPassword != null}
-                    fullWidth
-                    inputRef={register({
-                        required: 'Required'
-                    })}
-                />
-                <Typography color="error">
-                    {errors.userPassword && errors.userPassword.message}
-                </Typography>
+                        <TextField
+                            className={classes.formField}
+                            name="userEmail"
+                            label="Your email"
+                            type="email"
+                            error={errors.userEmail != null}
+                            fullWidth
+                            inputRef={register({
+                                required: 'Required'
+                            })}
+                        />
+                        <Typography color="error">
+                            {errors.userEmail && errors.userEmail.message}
+                        </Typography>
 
 
-                <TextField
-                    className={classes.formField}
-                    name="confirmPassword"
-                    label="Confirm password"
-                    type="password"
-                    error={errors.confirmPassword != null}
-                    fullWidth
-                    inputRef={register({
-                        required: 'Required'
-                    })}
-                />
-                <Typography color="error">
-                    {errors.confirmPassword && errors.confirmPassword.message}
-                </Typography>
+                        <TextField
+                            className={classes.formField}
+                            name="userPassword"
+                            label="Password"
+                            type="password"
+                            error={errors.userPassword != null}
+                            fullWidth
+                            inputRef={register({
+                                required: 'Required'
+                            })}
+                        />
+                        <Typography color="error">
+                            {errors.userPassword && errors.userPassword.message}
+                        </Typography>
 
-                <Typography color="error">
-                    {serverError}
-                </Typography>
 
-                <Button
-                    className={classes.formField}
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                    >SIGN UP
-                </Button>
-            </form>
+                        <TextField
+                            className={classes.formField}
+                            name="confirmPassword"
+                            label="Confirm password"
+                            type="password"
+                            error={errors.confirmPassword != null}
+                            fullWidth
+                            inputRef={register({
+                                required: 'Required'
+                            })}
+                        />
+                        <Typography color="error">
+                            {errors.confirmPassword && errors.confirmPassword.message}
+                        </Typography>
+
+                        <Typography color="error">
+                            {serverError}
+                        </Typography>
+
+                        <Button
+                            className={classes.formField}
+                            variant="contained"
+                            type="submit"
+                            color="primary"
+                            >Create
+                        </Button>
+                    </form>
+                </Paper>
+            </div>
         </div>
     )
 }
