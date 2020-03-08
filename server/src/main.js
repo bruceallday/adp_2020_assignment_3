@@ -1,17 +1,16 @@
-import { ApolloServer, gql } from 'apollo-server'
+import { ApolloServer, gql } from 'apollo-server';
 import { Pool } from 'pg' 
 import bcrypt from 'bcrypt';
 import csurf from 'csurf';
 import cors from 'cors';
 
-const pool = new Pool()
+const pool = new Pool();
 
 const registerNewUser = (password) => {
-  const saltRounds = 10
-  const hash = bcrypt.hash(password, saltRounds)
-  return hash
-
-}
+  const saltRounds = 10;
+  const hash = bcrypt.hash(password, saltRounds);
+  return hash;
+};
 
 // The GraphQL schema
 const typeDefs = gql`
@@ -23,16 +22,16 @@ const typeDefs = gql`
 
 // A map of functions which return data for the schema.
 const resolvers = {
-    Query: {
-        hello: () => 'world',
-    },
+  Query: {
+    hello: () => 'world',
+  },
 };
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+  typeDefs,
+  resolvers,
 });
 
 server.listen().then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
 });

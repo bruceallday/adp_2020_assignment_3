@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStyles } from './header.styles'
+import useStyles from './header.styles'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar' 
