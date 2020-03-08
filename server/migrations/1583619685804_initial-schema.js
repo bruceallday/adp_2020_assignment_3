@@ -15,6 +15,19 @@ exports.up = pgm => {
         },
     }),
 
+    pgm.createTable('user_posts', {
+        id: 'id',
+        post_title: {type: 'text', notNull: true},
+        post_body: {type: 'text', notNull: true},
+        post_tags: {type: 'text', notNull: true},
+        post_user_id: {type: 'int', notNull: true},
+        createdAt: {
+            type: 'timestamp',
+            notNull: true,
+            default: pgm.func('current_timestamp'),
+        }
+    })
+
 };
 
 pgm.sql(`
