@@ -5,19 +5,20 @@ export const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-
-    title: {
-        flexGrow: 1,
-    },
-
     link: {
         textDecoration: 'none',
         color: 'white',
-        padding: 15
-    }
+        padding: 15,
+    },
 
+    linkDiv: { 
+        display: 'flex', 
+        flexDirection: 'row' 
+    },
 
+    toolBar: { 
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'space-between' 
+    },
 }))

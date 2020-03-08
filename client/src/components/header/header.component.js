@@ -16,23 +16,23 @@ const Header = () => {
     return(
         <div className={classes.root}>
             <AppBar position='static'>
-                <Toolbar>
+                <Toolbar className={classes.toolBar}>
 
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+                    <Link className={classes.link} to="/">
+                        <IconButton edge="start" color="inherit" aria-label="menu">
+                            <MenuIcon />
+                        </IconButton>
+                    </Link>
 
-                    <Typography variant="h6" className={classes.title}>
-                        News
-                    </Typography>
+                    <div className={classes.linkDiv}>
+                        <Typography>
+                            <Link className={classes.link} to="/login">Login</Link>
+                        </Typography>
 
-                    <Typography>
-                        <Link className={classes.link} to="/login">Login</Link>
-                    </Typography>
-
-                    <Typography>
-                        <Link className={classes.link} to="/signup">Create Account</Link>
-                    </Typography>
+                        <Typography>
+                            <Link className={classes.link} to="/signup">Create Account</Link>
+                        </Typography>
+                    </div>
 
                 </Toolbar>
             </AppBar>
