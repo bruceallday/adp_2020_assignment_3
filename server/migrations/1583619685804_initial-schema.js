@@ -5,9 +5,9 @@ exports.shorthands = undefined;
 exports.up = (pgm) => {
   pgm.createTable('users', {
     id: 'id',
-    user_name: {type: 'text', notNull: true},
-    user_email: {type: 'text', notNull: true},
-    user_password: {type: 'text', notNull: true},
+    user_name: { type: 'text', notNull: true, unique: true },
+    user_email: { type: 'text', notNull: true, unique: true },
+    user_password: { type: 'text', notNull: true },
     created_at: {
       type: 'timestamp',
       notNull: true,
@@ -17,11 +17,11 @@ exports.up = (pgm) => {
 
   pgm.createTable('user_posts', {
     id: 'id',
-    post_title: {type: 'text', notNull: true},
-    post_body: {type: 'text', notNull: true},
-    post_tags: {type: 'text', notNull: true},
-    post_likes: {type: 'int', notNull: true},
-    post_user_id: {type: 'int', notNull: true},
+    post_title: { type: 'text', notNull: true },
+    post_body: { type: 'text', notNull: true },
+    post_tags: { type: 'text', notNull: true },
+    post_likes: { type: 'int', notNull: true },
+    post_user_id: { type: 'int', notNull: true },
     created_at: {
       type: 'timestamp',
       notNull: true,
