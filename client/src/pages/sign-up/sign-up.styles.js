@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({
   root: {
-    width: 450,
+    width: 350,
     alignSelf: 'center',
   },
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles(({
   },
 
   paper: {
-    width: 500,
+    width: 400,
     padding: 30,
   },
 
