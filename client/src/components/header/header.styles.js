@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(({
   root: {
     flexGrow: 1,
   },
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
   },
 
-  toolBar: { 
+  toolBar: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
