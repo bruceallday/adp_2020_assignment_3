@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
     const classes = useStyles()
 
-    return(
+    return (
         <div className={classes.root}>
             <AppBar position='static'>
                 <Toolbar className={classes.toolBar}>
@@ -30,7 +30,7 @@ const Header = () => {
                         </Typography>
 
                         <Typography>
-                            <Link className={classes.link} to="/signup">Create Account</Link>
+                            <Link className={classes.link} to="/signup">Create account</Link>
                         </Typography>
                     </div>
 

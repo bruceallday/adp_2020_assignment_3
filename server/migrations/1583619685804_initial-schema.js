@@ -32,4 +32,4 @@ exports.up = (pgm) => {
   pgm.sql(``);
 };
 
-exports.down = pgm => {};
+exports.down = (pgm) => {};
