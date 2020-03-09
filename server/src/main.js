@@ -29,7 +29,8 @@ const typeDefs = gql`
   input CreateUserInput {
     userName: String!
     userEmail: String!
-    userPassword: String! 
+    userPassword: String!
+    confirmPassword: String!
   }
 
   type User {

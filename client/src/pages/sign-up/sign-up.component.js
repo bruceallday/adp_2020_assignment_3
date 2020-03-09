@@ -29,7 +29,7 @@ const SignUp = () => {
         }
 
         const mutation = `
-            mutation:($input: CreateUserInput!){
+            mutation($input: CreateUserInput!){
                 createUser(
                     input: $input
                 ){
