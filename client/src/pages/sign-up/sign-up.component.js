@@ -28,6 +28,12 @@ const SignUp = () => {
             return
         }
 
+        const userData = {
+            userName: values.userName,
+            userEmail: values.userEmail,
+            userPassword: values.userPassword
+        }
+
         const mutation = `
             mutation($input: CreateUserInput!){
                 createUser(
@@ -43,12 +49,12 @@ const SignUp = () => {
                 options.url = "http://localhost:4000/graphql"
             },
             operation: {
-                variables: { input: getValues() },
+                variables: { input: userData },
                 query: mutation,
             },
         })
         const { data } = await cacheValuePromise
-
+        
         history.push(`/login`)
     }
 

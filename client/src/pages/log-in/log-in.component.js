@@ -4,21 +4,49 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { useForm } from 'react-hook-form'
+import { GraphQLContext } from 'graphql-react'
 
 import Header from '../../components/header/header.component'
 
 import Paper from '@material-ui/core/Paper'
 
 import useStyles from './log-in.styles'
+import { useHistory } from 'react-router-dom'
 
 const LogIn = () => {
     const classes = useStyles()
-
+    const graphql = React.useContext(GraphQLContext)
     const { handleSubmit, register, errors } = useForm()
     const [ serverError, setServerError ] = useState()
+    const history = useHistory()
 
     const onSubmit = async values => {
-        console.log(values)
+        console.log("FRONT END VALUES", values)
+        const userData = {
+            userName: values.userName,
+            userPassword: values.userPassword
+        }
+        const mutation = `
+            mutation($input: CreateLogInInput!) {
+                logIn(
+                    input: $input
+                ){
+                    id
+                }
+            }
+        `
+        const { cacheValuePromise } = graphql.operate({
+            fetchOptionsOverride: (options) => {
+                options.url = "http://localhost:4000/graphql"
+            },
+            operation: {
+                variables: { input: userData },
+                query: mutation,
+            },
+        })
+        const { data } = await cacheValuePromise
+
+        history.push(`/home`)
     }
 
     return (

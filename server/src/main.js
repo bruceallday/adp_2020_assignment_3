@@ -24,19 +24,24 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(input: CreateUserInput!): User!
+    logIn(input: CreateLogInInput!): User!
+  }
+
+  input CreateLogInInput {
+    userName: String!
+    userPassword: String!
   }
 
   input CreateUserInput {
     userName: String!
     userEmail: String!
     userPassword: String!
-    confirmPassword: String!
   }
 
   type User {
     id: ID!
     userName: String!
-    userEmail: String!
+    userEmail: String
     userPassword: String! 
   }
 `;
@@ -59,6 +64,27 @@ const resolvers = {
           ( $1, $2, $3 )
       `, [userName, userEmail, hash]);
       return results.rows[0];
+    },
+
+    logIn: async (source, args) => {
+      const { userName, userPassword } = args.input;
+
+      console.log('PASSWORD', userPassword);
+
+      const userResult = await pool.query(`
+          SELECT * FROM users WHERE user_name = $1
+      `, [userName]);
+
+      const user = userResult.rows[0];
+      console.log('USER', user);
+
+      const isValidPassword = await bcrypt.compare(userPassword, user.user_password);
+
+      if (isValidPassword) {
+        console.log('VALID PASSWORD!');
+      }else{
+        console.log('INVALID PASSWORD')
+      }
     },
   },
 };
