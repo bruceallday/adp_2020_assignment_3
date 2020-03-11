@@ -6,6 +6,10 @@ import cors from 'cors';
 
 const pool = new Pool();
 
+const csrfProtect = csurf({
+  ignoreMethods: [],
+});
+
 const registerNewUser = (password) => {
   const saltRounds = 10;
   const hash = bcrypt.hash(password, saltRounds);
@@ -69,22 +73,27 @@ const resolvers = {
     logIn: async (source, args) => {
       const { userName, userPassword } = args.input;
 
-      console.log('PASSWORD', userPassword);
+      console.log('ARGS', args);
 
-      const userResult = await pool.query(`
+      try {
+        const userResult = await pool.query(`
           SELECT * FROM users WHERE user_name = $1
       `, [userName]);
 
-      const user = userResult.rows[0];
-      console.log('USER', user);
+        const user = userResult.rows[0];
+        console.log('USER', user);
 
-      const isValidPassword = await bcrypt.compare(userPassword, user.user_password);
+        const isValidPassword = await bcrypt.compare(userPassword, user.user_password);
 
-      if (isValidPassword) {
-        console.log('VALID PASSWORD!');
-      }else{
-        console.log('INVALID PASSWORD')
+        if (!isValidPassword) {
+          console.log('INVALID PASSWORD!');
+        } else {
+          console.log('VALID PASSWORD');
+        }
+      } catch (e) {
+        console.log(e);
       }
+
     },
   },
 };

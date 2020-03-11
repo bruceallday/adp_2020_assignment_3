@@ -5,10 +5,9 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { useForm } from 'react-hook-form'
 import { GraphQLContext } from 'graphql-react'
+import Paper from '@material-ui/core/Paper'
 
 import Header from '../../components/header/header.component'
-
-import Paper from '@material-ui/core/Paper'
 
 import useStyles from './log-in.styles'
 import { useHistory } from 'react-router-dom'
@@ -22,10 +21,12 @@ const LogIn = () => {
 
     const onSubmit = async values => {
         console.log("FRONT END VALUES", values)
+
         const userData = {
             userName: values.userName,
             userPassword: values.userPassword
         }
+
         const mutation = `
             mutation($input: CreateLogInInput!) {
                 logIn(
@@ -35,18 +36,33 @@ const LogIn = () => {
                 }
             }
         `
-        const { cacheValuePromise } = graphql.operate({
+        const { cacheValuePromise } = await graphql.operate({
             fetchOptionsOverride: (options) => {
                 options.url = "http://localhost:4000/graphql"
+                // options.credentials = 'include'
+                options.mode = 'cors'
+                // options.method = 'POST'
+                console.log("OPTIONS", options)
             },
             operation: {
                 variables: { input: userData },
                 query: mutation,
             },
         })
-        const { data } = await cacheValuePromise
 
-        history.push(`/home`)
+        const data = cacheValuePromise
+
+        console.log("DATA", data)
+        console.log
+
+        history.push('/home')
+
+        // if (data.error != null) {
+        //     setServerError(data.error.message)
+        // } else {
+        //     localStorage.setItem('csrfToken', data.csrfToken)
+        //     history.push('/home')
+        // }
     }
 
     return (
