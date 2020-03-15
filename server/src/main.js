@@ -1,14 +1,19 @@
-import { ApolloServer, gql } from 'apollo-server';
 import { Pool } from 'pg' 
 import bcrypt from 'bcrypt';
-import csurf from 'csurf';
-import cors from 'cors';
+// import csurf from 'csurf';
+// import csrf from 'csrf';
+// import cors from 'cors';
+import jwt from 'jsonwebtoken'
+import express from 'express'
+import { ApolloServer, gql } from 'apollo-server-express';
+// import session from 'express-session';
 
 const pool = new Pool();
 
-const csrfProtect = csurf({
-  ignoreMethods: [],
-});
+// const tokens = new csrf();
+// const secret = tokens.secretSync();
+// const token = tokens.create(secret);
+// console.log('Token >> ', token);
 
 const registerNewUser = (password) => {
   const saltRounds = 10;
@@ -28,7 +33,12 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(input: CreateUserInput!): User!
-    logIn(input: CreateLogInInput!): User!
+    logIn(input: CreateLogInInput!): LoginResult!
+  }
+
+  type LoginResult {
+    token: String!
+    user: User!
   }
 
   input CreateLogInInput {
@@ -70,9 +80,10 @@ const resolvers = {
       return results.rows[0];
     },
 
-    logIn: async (source, args) => {
-      const { userName, userPassword } = args.input;
+    logIn: async (source, args, context) => {
 
+      const { userName, userPassword } = args.input;
+      console.log('CONTEXT', context.extensionStack);
       console.log('ARGS', args);
 
       try {
@@ -81,28 +92,54 @@ const resolvers = {
       `, [userName]);
 
         const user = userResult.rows[0];
-        console.log('USER', user);
 
         const isValidPassword = await bcrypt.compare(userPassword, user.user_password);
 
         if (!isValidPassword) {
-          console.log('INVALID PASSWORD!');
+          console.log('INVALID PASSWORD');
         } else {
-          console.log('VALID PASSWORD');
+          console.log('PASSWORD VALID!');
+          const token = jwt.sign( {userID: user.id }, process.env.JWT_SECRET );
+
+          return {
+            token,
+            user,
+          };
+          // context.response.cookie('token', token, {
+          //   httpOnly: false,
+          //   maxAge: 30 * 24 * 60 * 60 * 1000,
+          // });
+          // return {
+          //   token,
+          //   message: 'VALID PASSWORD',
+          // };
         }
       } catch (e) {
         console.log(e);
+        return {
+          message: e,
+        };
       }
 
     },
   },
 };
 
-const server = new ApolloServer({
+const createServer = () => new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => {
+    return { req }
+  },
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
+const app = express();
+
+createServer().applyMiddleware({ app });
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000/public/graphql`),
+);
+// CONTEXT {
+//   _extensionStack: GraphQLExtensionStack { extensions: [[CacheControlExtension]] }
+// }

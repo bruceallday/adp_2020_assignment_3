@@ -13,6 +13,7 @@ import useStyles from './log-in.styles'
 import { useHistory } from 'react-router-dom'
 
 const LogIn = () => {
+
     const classes = useStyles()
     const graphql = React.useContext(GraphQLContext)
     const { handleSubmit, register, errors } = useForm()
@@ -32,16 +33,14 @@ const LogIn = () => {
                 logIn(
                     input: $input
                 ){
-                    id
+                    user {id}
+                    token
                 }
             }
         `
-        const { cacheValuePromise } = await graphql.operate({
+        const { cacheValuePromise } = graphql.operate({
             fetchOptionsOverride: (options) => {
                 options.url = "http://localhost:4000/graphql"
-                // options.credentials = 'include'
-                options.mode = 'cors'
-                // options.method = 'POST'
                 console.log("OPTIONS", options)
             },
             operation: {
@@ -50,23 +49,20 @@ const LogIn = () => {
             },
         })
 
-        const data = cacheValuePromise
+        const { data } = await cacheValuePromise
 
         console.log("DATA", data)
-        console.log
 
-        history.push('/home')
-
-        // if (data.error != null) {
-        //     setServerError(data.error.message)
-        // } else {
-        //     localStorage.setItem('csrfToken', data.csrfToken)
-        //     history.push('/home')
-        // }
+        if (data.error != null) {
+            setServerError(data.error.message)
+        } else {
+            localStorage.setItem('jwt', data.logIn.token)
+            history.push('/home')
+        }
     }
 
     return (
-        <div >
+        <div>
             <Header />
             <div className={classes.formContainer} >
                 <Paper elevation={3} className={classes.paper} >

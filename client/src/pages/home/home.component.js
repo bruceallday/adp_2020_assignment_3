@@ -10,16 +10,18 @@ import useStyles from './home.styles'
 const Home = () => {
     const classes = useStyles()
     const history = useHistory()
-    const csrfToken = localStorage.getItem('csrfToken')
-    const isLoggedIn = csrfToken !== null
+    const token = localStorage.getItem('jwt')
+    const isLoggedIn = token !== null
 
     return(
         <div>
             <Header />
+
             <Paper className={classes.root} >
-                <Typography variant="h1" gutterBottom >
-                    Welcome!
+            <Typography variant="h1" gutterBottom >
+                {token ? 'Welcome USER' : 'Welcome!' }
                 </Typography>
+
             </Paper>
                            
         </div>

@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "COOKIE_SECRET=bad_secret PGUSER=postgres PGDATABASE=ASSIGNMENT_3_DB npx nodemon ./src/index.js",
+    "start": "JWT_SECRET=bad_secret PGUSER=postgres PGDATABASE=ASSIGNMENT_3_DB npx nodemon ./src/index.js",
     "start:production": "./src/index.js",
     "db:migrate": "DATABASE_URL=postgres://postgres@localhost:5432/ASSIGNMENT_3_DB node-pg-migrate",
     "db:create": "npx createdbjs ASSIGNMENT_3_DB",
@@ -13,24 +13,29 @@
   },
   "dependencies": {
     "apollo-server": "^2.11.0",
-    "graphql": "^14.6.0",
+    "apollo-server-express": "^2.11.0",
     "bcrypt": "^4.0.0",
     "connect-pg-simple": "^6.1.0",
     "cors": "^2.8.5",
+    "csrf": "^3.1.0",
     "csurf": "^1.11.0",
     "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "graphql": "^14.6.0",
+    "jsonwebtoken": "^8.5.1",
     "node-pg-migrate": "^4.2.2",
     "nodemon": "^2.0.2",
     "pg": "^7.18.2",
     "pgtools": "^0.3.0"
   },
-    "devDependencies": {
-      "eslint": "^6.8.0",
-      "eslint-config-airbnb": "^18.0.1",
-      "eslint-plugin-import": "^2.20.0",
-      "eslint-plugin-jsx-a11y": "^6.2.3",
-      "eslint-plugin-react": "^7.18.0",
-      "eslint-plugin-react-hooks": "^1.7.0",
-      "parcel": "2.0.0-alpha.3.2"
-    }
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "parcel": "2.0.0-alpha.3.2"
+  }
 }
