@@ -19,8 +19,7 @@ exports.up = (pgm) => {
     id: 'id',
     post_title: { type: 'text', notNull: true },
     post_body: { type: 'text', notNull: true },
-    post_tags: { type: 'text', notNull: true },
-    post_likes: { type: 'int', notNull: true },
+    post_likes: { type: 'int'},
     post_user_id: { type: 'int', notNull: true },
     created_at: {
       type: 'timestamp',

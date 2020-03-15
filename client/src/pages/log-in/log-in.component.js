@@ -47,14 +47,13 @@ const LogIn = () => {
         })
 
         const { data } = await cacheValuePromise
-
-        console.log("DATA", data)
+        const userUrl = data.logIn.user.id
 
         if (data.error != null) {
             setServerError(data.error.message)
         } else {
             localStorage.setItem('jwt', data.logIn.token)
-            history.push(`/home`)
+            history.push(`/feed`)
         }
     }
 

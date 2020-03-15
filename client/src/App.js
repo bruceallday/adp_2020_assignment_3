@@ -13,6 +13,7 @@ import Home from './pages/home/home.component'
 import LogIn from './pages/log-in/log-in.component'
 import SignUp from './pages/sign-up/sign-up.component'
 import Header from './components/header/header.component'
+import Feed from './pages/feed/feed.component'
 
 const graphql = new GraphQL()
 
@@ -25,6 +26,10 @@ const App = () => {
 
                         <Route path="/" exact>
                             <Home />
+                        </Route>
+
+                        <Route path="/feed">
+                            <Feed />
                         </Route>
 
                         <Route path="/login" exact>

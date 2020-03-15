@@ -39,7 +39,13 @@ const Header = () => {
                            
                         </Typography>
                         <Typography>
-                            <Link className={classes.link} to="/signup">Create account</Link>
+                            {!token && (
+                                <Link
+                                    className={classes.link}
+                                    to="/signup"
+                                    >Create account
+                                    </Link>
+                            )}
                         </Typography>
                     </div>
 

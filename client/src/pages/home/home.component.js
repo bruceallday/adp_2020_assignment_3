@@ -9,45 +9,18 @@ import Typography from '@material-ui/core/Typography'
 import useStyles from './home.styles'
 
 const Home = () => {
-
     const classes = useStyles()
-    const token = localStorage.getItem('jwt')
-    const { id } = useParams()
-
-    // const { loading, cacheValue } = useGraphQL({
-    //     fetchOptionsOverride: (options) => {
-    //         options.url = "http://localhost:4000/graphql"
-    //     },
-    //     operation: {
-    //         query: `
-    //         {
-    //             user(id: ${id}){
-    //                 id
-    //             }
-    //         }
-    //         `
-    //     },
-    //     loadOnMount: true,
-    // })
-
-    // if (loading || cacheValue == null) {
-    //     return <div>Loading...</div>
-    // }
-
-    // const { data } = cacheValue.data
-
-    const test = "placeholder"
+    // const token = localStorage.getItem('jwt')
+    // console.log('TOKEN', token)
 
     return(
         <div>
             <Header />
-
             <Paper className={classes.root} >
-            <Typography variant="h1" gutterBottom >
-                    {token ? `Welcome @${test}` : 'Welcome' }
+            <Typography variant="h4" gutterBottom >
+                    Welcome! Log in or sign up to share a thought.
                 </Typography>
             </Paper>
-                           
         </div>
     )
 }

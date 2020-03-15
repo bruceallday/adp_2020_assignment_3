@@ -1,19 +1,10 @@
-import { Pool } from 'pg' 
+import { Pool } from 'pg';
 import bcrypt from 'bcrypt';
-// import csurf from 'csurf';
-// import csrf from 'csrf';
-// import cors from 'cors';
-import jwt from 'jsonwebtoken'
-import express from 'express'
+import jwt from 'jsonwebtoken';
+import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
-// import session from 'express-session';
 
 const pool = new Pool();
-
-// const tokens = new csrf();
-// const secret = tokens.secretSync();
-// const token = tokens.create(secret);
-// console.log('Token >> ', token);
 
 const registerNewUser = (password) => {
   const saltRounds = 10;
@@ -65,21 +56,14 @@ const resolvers = {
   Query: {
     hello: () => 'world',
 
-    // users: async (source, args) => {
-    //   if (args.id != null) {
-    //     const results = await pool.query(`
-    //                 SELECT * FROM users
-    //                 WHERE id = $1
-    //             `, [args.id]);
-    //     return results.rows;
-    //   }
-    //   if (args.id) {
-    //     const results = await pool.query(`
-    //                 SELECT * FROM users
-    //             `);
-    //     return results.rows;
-    //   }
-    // },
+    user: async (source, args) => {
+
+      const results = await pool.query(`
+                SELECT * FROM users
+                WHERE id = $1
+            `, [args.id])
+      return results.rows
+    },
   },
 
   Mutation: {
@@ -108,6 +92,8 @@ const resolvers = {
 
         const user = userResult.rows[0];
 
+        console.log('USER', user);
+
         const isValidPassword = await bcrypt.compare(userPassword, user.user_password);
 
         if (!isValidPassword) {
@@ -130,7 +116,6 @@ const resolvers = {
           // };
         }
       } catch (error) {
-        console.log(error);
         return {
           message: error,
         };
@@ -144,7 +129,6 @@ const createServer = () => new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    console.log('REQUEST', req);
     return { req };
   },
 });
