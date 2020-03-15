@@ -21,8 +21,6 @@ const LogIn = () => {
     const history = useHistory()
 
     const onSubmit = async values => {
-        console.log("FRONT END VALUES", values)
-
         const userData = {
             userName: values.userName,
             userPassword: values.userPassword
@@ -41,7 +39,6 @@ const LogIn = () => {
         const { cacheValuePromise } = graphql.operate({
             fetchOptionsOverride: (options) => {
                 options.url = "http://localhost:4000/graphql"
-                console.log("OPTIONS", options)
             },
             operation: {
                 variables: { input: userData },
@@ -57,7 +54,7 @@ const LogIn = () => {
             setServerError(data.error.message)
         } else {
             localStorage.setItem('jwt', data.logIn.token)
-            history.push('/home')
+            history.push(`/home`)
         }
     }
 

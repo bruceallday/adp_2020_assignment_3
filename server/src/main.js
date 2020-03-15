@@ -64,6 +64,22 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => 'world',
+
+    // users: async (source, args) => {
+    //   if (args.id != null) {
+    //     const results = await pool.query(`
+    //                 SELECT * FROM users
+    //                 WHERE id = $1
+    //             `, [args.id]);
+    //     return results.rows;
+    //   }
+    //   if (args.id) {
+    //     const results = await pool.query(`
+    //                 SELECT * FROM users
+    //             `);
+    //     return results.rows;
+    //   }
+    // },
   },
 
   Mutation: {
@@ -81,7 +97,6 @@ const resolvers = {
     },
 
     logIn: async (source, args, context) => {
-
       const { userName, userPassword } = args.input;
       console.log('CONTEXT', context.extensionStack);
       console.log('ARGS', args);
@@ -99,7 +114,7 @@ const resolvers = {
           console.log('INVALID PASSWORD');
         } else {
           console.log('PASSWORD VALID!');
-          const token = jwt.sign( {userID: user.id }, process.env.JWT_SECRET );
+          const token = jwt.sign({ userID: user.id }, process.env.JWT_SECRET);
 
           return {
             token,
@@ -114,10 +129,10 @@ const resolvers = {
           //   message: 'VALID PASSWORD',
           // };
         }
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
         return {
-          message: e,
+          message: error,
         };
       }
 
@@ -129,7 +144,8 @@ const createServer = () => new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    return { req }
+    console.log('REQUEST', req);
+    return { req };
   },
 });
 

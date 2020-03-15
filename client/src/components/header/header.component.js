@@ -14,11 +14,6 @@ const Header = () => {
     const classes = useStyles()
     const token = localStorage.getItem('jwt')
 
-    const handlePress = () => {
-        console.log("clicked")
-    }
-
-
     return (
         <div className={classes.root}>
             <AppBar position='static'>
@@ -35,9 +30,9 @@ const Header = () => {
                             {token ? (
                                 <Link
                                     className={classes.link} 
-                                    to="/" onClick={() => (
+                                    onClick={() => (
                                         localStorage.removeItem('jwt')
-                                    )} >Log Out</Link> 
+                                    )} to="/home" >Log Out</Link> 
                             ):(  
                                 <Link className={classes.link} to="/login">Login</Link>
                             )}

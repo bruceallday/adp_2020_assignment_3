@@ -41,7 +41,7 @@ const App = () => {
 
                         <Route path="/" >
                             404 PAGE
-                    </Route>
+                        </Route>
 
                     </Switch>
                 </Router>        
