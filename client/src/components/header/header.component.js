@@ -12,6 +12,12 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     const classes = useStyles()
+    const token = localStorage.getItem('jwt')
+
+    const handlePress = () => {
+        console.log("clicked")
+    }
+
 
     return (
         <div className={classes.root}>
@@ -26,9 +32,17 @@ const Header = () => {
 
                     <div className={classes.linkDiv}>
                         <Typography>
-                            <Link className={classes.link} to="/login">Login</Link>
+                            {token ? (
+                                <Link
+                                    className={classes.link} 
+                                    to="/" onClick={() => (
+                                        localStorage.removeItem('jwt')
+                                    )} >Log Out</Link> 
+                            ):(  
+                                <Link className={classes.link} to="/login">Login</Link>
+                            )}
+                           
                         </Typography>
-
                         <Typography>
                             <Link className={classes.link} to="/signup">Create account</Link>
                         </Typography>
