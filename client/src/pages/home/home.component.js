@@ -10,15 +10,15 @@ import useStyles from './home.styles'
 
 const Home = () => {
     const classes = useStyles()
-    // const token = localStorage.getItem('jwt')
+    const token = localStorage.getItem('jwt')
     // console.log('TOKEN', token)
 
     return(
         <div>
             <Header />
             <Paper className={classes.root} >
-            <Typography variant="h4" gutterBottom >
-                    Welcome! Log in or sign up to share a thought.
+            <Typography variant="h5" gutterBottom >
+                    {token ? `Welcome! thoughts is a place to well.. you know.. share a thought` : `Log in or sign up to share a thought!`}
                 </Typography>
             </Paper>
         </div>
